@@ -1,8 +1,6 @@
 name: Tests
 on:
   push:
-    branches:
-      - master
   pull_request:
 
 
@@ -11,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodeVersion }}
 
@@ -28,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodeVersion }}
 
@@ -47,12 +45,13 @@ jobs:
       fail-fast: false
       matrix:
        include:
-         - nodeVersion: 10.x
-           testPlugins: "meteor"
-           testOptions: "--non-root"
-         - nodeVersion: 10.x
-           testPlugins: "docker,mongo,proxy,default"
-           testOptions: "--non-root"
+# in mcp we do not support node 10 anymore
+#         - nodeVersion: 10.x
+#           testPlugins: "meteor"
+#           testOptions: "--non-root"
+#         - nodeVersion: 10.x
+#           testPlugins: "docker,mongo,proxy,default"
+#           testOptions: "--non-root"
          - nodeVersion: 22.x
            testPlugins: "meteor"
            testOptions: ""
@@ -61,10 +60,10 @@ jobs:
            testOptions: ""
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Install Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.nodeVersion }}
 
